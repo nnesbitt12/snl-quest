@@ -1,0 +1,5 @@
+config,annual_savings,demand_savings
+Entry  30kW / 60kWh,3624,3646
+Value  50kW / 150kWh,5646,5719
+Balanced 100kW/200kWh,6219,6314
+DeepShave 100kW/300kWh,6858,6977

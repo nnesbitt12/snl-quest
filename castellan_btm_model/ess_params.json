@@ -1,0 +1,42 @@
+[
+  {
+    "label": "Entry  30kW / 60kWh",
+    "Power_rating": 30,
+    "Energy_capacity": 60,
+    "Round_trip_efficiency": 0.9,
+    "Transformer_rating": 10000,
+    "State_of_charge_min": 0.1,
+    "State_of_charge_max": 0.9,
+    "State_of_charge_init": 0.5
+  },
+  {
+    "label": "Value  50kW / 150kWh",
+    "Power_rating": 50,
+    "Energy_capacity": 150,
+    "Round_trip_efficiency": 0.9,
+    "Transformer_rating": 10000,
+    "State_of_charge_min": 0.1,
+    "State_of_charge_max": 0.9,
+    "State_of_charge_init": 0.5
+  },
+  {
+    "label": "Balanced 100kW/200kWh",
+    "Power_rating": 100,
+    "Energy_capacity": 200,
+    "Round_trip_efficiency": 0.9,
+    "Transformer_rating": 10000,
+    "State_of_charge_min": 0.1,
+    "State_of_charge_max": 0.9,
+    "State_of_charge_init": 0.5
+  },
+  {
+    "label": "DeepShave 100kW/300kWh",
+    "Power_rating": 100,
+    "Energy_capacity": 300,
+    "Round_trip_efficiency": 0.9,
+    "Transformer_rating": 10000,
+    "State_of_charge_min": 0.1,
+    "State_of_charge_max": 0.9,
+    "State_of_charge_init": 0.5
+  }
+]
