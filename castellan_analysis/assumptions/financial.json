@@ -1,0 +1,20 @@
+{
+  "_comment": "Financial assumptions (all values in CAD). CAPEX is derived from the BOM (see bom_scenario) plus the adders below and a contingency. Set capex_overrides.installed_cost_cad to a number to bypass the BOM and force a total installed cost.",
+  "currency": "CAD",
+  "discount_rate": 0.08,
+  "project_life_years": 20,
+  "electricity_escalation_rate": 0.03,
+  "opex_escalation_rate": 0.02,
+  "annual_maintenance_cad": 2000,
+  "pv_degradation_rate": 0.005,
+  "bom_scenario": "current_total",
+  "_bom_scenario_options": ["current_total", "optimized_target", "line_items_included"],
+  "contingency_pct": 0.10,
+  "capex_overrides": {
+    "installed_cost_cad": null,
+    "epc_install_cost_cad": 0,
+    "interconnection_cost_cad": 0,
+    "engineering_cost_cad": 0,
+    "other_adders_cad": 0
+  }
+}

@@ -1,0 +1,32 @@
+category,item,description,qty,scope,necessity,unit_cost,total_cost,capex_opex,included,notes,qty_num
+Main Equipment,Battery Inverter,LuxPower GEN-HB-US 25KW (parallel cluster),3,BATTERY,REQUIRED,11666.67,35000.0,CAPEX,True,"Grid-forming. Each Sunny Island ~$7K. Right-sizing could drop 1-2 units. right sized - LuxPower GEN-HB-US-25kW -qty 3, quote recieved",3.0
+Main Equipment,PV Modules,~75 kW DC array (500W modules) 600V DC System,150,PV,REQUIRED,110.0,16500.0,CAPEX,True,$200/module is reasonable. Tier-2 brands could save further but check warranty terms.,150.0
+Main Equipment,EMS Controller,SMA Data Manager / Microgrid Controller,1,SHARED,REQUIRED,3500.0,3500.0,CAPEX,True,Recommended by SMA for multi-inverter clusters.,1.0
+PV DC Side,PV Wire,#10 AWG Cu PV Wire (USE-2),As req'd,PV,REVIEW,15000.0,15000.0,CAPEX,True,Verify takeoff. Likely overestimated by ~10x.,
+PV DC Side,Home Run,4 AWG,250 m,PV,REQUIRED,5000.0,5000.0,CAPEX,True,Reasonable. Gauge optimization could yield small savings.,
+PV DC Side,Connectors,MC4 compatible,310,PV,REQUIRED,4.84,1500.0,CAPEX,True,$5/connector — fair pricing. 310 = 150 modules x 2 + spares.,310.0
+PV DC Side,Cable Management,Conduit + tray + clips (underground rated),As req'd,SHARED,REVIEW,15000.0,15000.0,CAPEX,True,Underground rated drives cost. Mostly PV DC runs — could split scope.,
+Battery DC,DC Busbar,Copper busbar ≥1200 A,2,BATTERY,REQUIRED,3750.0,7500.0,CAPEX,True,Standard for cluster of this size.,2.0
+Battery DC,Battery Rack Fuses,250-300 A DC fuses,8-12,BATTERY,REVIEW,2200.0,2200.0,CAPEX,True,"If rack breakers (next row) are kept, fuses become redundant. Confirm with BMS spec.",
+Battery DC,Battery Rack Breaker,250-300 A DC Breaker,8-12,BATTERY,REQUIRED,11000.0,11000.0,CAPEX,True,"If kept, eliminate fuses above for $2.2K savings.",
+Battery DC,Battery Disconnect,1200 A DC disconnect,1,BATTERY,REQUIRED,6000.0,6000.0,CAPEX,True,Critical safety device.,1.0
+Battery DC,Battery Cables,4/0 AWG Cu (or parallel sets),As req'd,BATTERY,REQUIRED,22000.0,22000.0,CAPEX,True,Cu pricing is volatile. Confirm OEM-approved Al lugs.,
+Battery DC,BMS,Integrated BMS,1 system,BATTERY,REQUIRED,0.0,0.0,CAPEX,True,No cost — bundled.,
+AC Power,PV Feeder Cable,#4 AWG Cu,As req'd,PV,REQUIRED,3000.0,3000.0,CAPEX,True,CORE1 to panel feeder.,
+AC Power,Battery Inverter Cable,4/0 AWG Cu,As req'd,BATTERY,REVIEW,10000.0,10000.0,CAPEX,True,Use mid-range $5K based on typical Sunny Island runs.,
+AC Power,Main Bus Cable,3/0 AWG Cu,As req'd,SHARED,REQUIRED,9000.0,9000.0,CAPEX,True,Standard sizing.,
+Protection,PV Breaker,"80 A, 3P",1,PV,REQUIRED,500.0,500.0,CAPEX,True,CORE1 output protection.,1.0
+Protection,Battery Inverter Breakers,"70 A, 3P",5,BATTERY,REQUIRED,500.0,2500.0,CAPEX,True,Reduces if inverter count drops.,5.0
+Protection,Main Breaker,"150 A, 3P",1,SHARED,REQUIRED,1200.0,1200.0,CAPEX,True,AC bus main.,1.0
+Protection,Surge Protection,Type 1 or 2 SPD (AC & DC),4,SHARED,RECOMMENDED,875.0,3500.0,CAPEX,True,Type 1 typically only required if exposed to direct lightning.,4.0
+Grounding,Ground Conductor,#2 AWG Cu stranded,350m,SHARED,REQUIRED,7000.0,7000.0,CAPEX,True,Equipment grounding.,
+Grounding,Ground Rods,"5/8"" x 8 ft Cu rods",4-6,SHARED,REQUIRED,500.0,500.0,CAPEX,True,Site dependent. Verify against soil resistivity.,
+Grounding,Ground Bus,Copper ground bar,1,SHARED,REQUIRED,600.0,600.0,CAPEX,True,Panel grounding.,1.0
+Grounding,Labels & Signage,NEC/CEC compliant,All cabinets,SHARED,REQUIRED,1200.0,1200.0,CAPEX,True,Non-negotiable for AHJ approval.,
+Controls,Monitoring System,SMA monitoring portal,1,SHARED,REQUIRED,0.0,0.0,CAPEX,True,Bundled — no cost.,1.0
+Controls,Communication Cables,Ethernet / RS485,1000m,SHARED,REQUIRED,2500.0,2500.0,CAPEX,True,Validate run length — could trim if not full 1000m.,
+Engineering,Basic SLD + Layout + Prelim BOM,PV design and integration included,-,SHARED,REQUIRED,13000.0,13000.0,CAPEX,True,Foundational deliverable.,
+Engineering,Detailed Electrical Design,CEC compliance,-,SHARED,REQUIRED,7500.0,7500.0,CAPEX,True,Required for permitting.,
+Engineering,Battery Integration & Control Design,-,-,BATTERY,REQUIRED,5500.0,5500.0,CAPEX,True,Critical for grid-forming coordination.,
+Studies,Short Circuit Study,-,-,SHARED,REQUIRED,3000.0,3000.0,CAPEX,True,Often bundled with Protection Study — see opportunity to combine.,
+Labour,Labour and Trenching,PV + BESS install,-,SHARED,REQUIRED,77500.0,77500.0,CAPEX,True,Original range $55-100K. Used midpoint. Competitive bid could trim 10-15%.,

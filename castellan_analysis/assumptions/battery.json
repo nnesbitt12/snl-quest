@@ -1,0 +1,16 @@
+{
+  "_comment": "Battery energy storage system (BESS) technical assumptions. Usable depth-of-discharge = state_of_charge_max - state_of_charge_min. The existing ~650 kWh pack is flagged in the BOM as EXISTING (sunk cost); set battery_capex_included=true and a battery_capex_cad value to treat a NEW battery as part of project CAPEX.",
+  "energy_capacity_kwh": 650,
+  "power_rating_kw": 75,
+  "round_trip_efficiency": 0.88,
+  "state_of_charge_min": 0.10,
+  "state_of_charge_max": 0.90,
+  "state_of_charge_init": 0.50,
+  "self_discharge_efficiency": 1.0,
+  "transformer_rating_kw": 1000,
+  "annual_degradation_rate": 0.02,
+  "battery_capex_included": false,
+  "battery_capex_cad": 0,
+  "replacement_year": 0,
+  "replacement_cost_cad": 0
+}

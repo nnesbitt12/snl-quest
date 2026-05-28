@@ -1,0 +1,41 @@
+{
+  "engine": "quest",
+  "annual_load_kwh": 175530.0,
+  "peak_load_kw": 114.9,
+  "annual_pv_kwh": 95265.0,
+  "status_quo_bill_cad": 22289.0,
+  "pv_only_bill_cad": 11323.0,
+  "project_bill_cad": 8503.0,
+  "annual_pv_savings_cad": 10966.0,
+  "annual_battery_savings_cad": 2821.0,
+  "annual_total_savings_cad": 13787.0,
+  "annual_energy_savings_cad": 2833.0,
+  "annual_demand_savings_cad": 0.0,
+  "avg_monthly_peak_reduction_kw": -36.4,
+  "solar_self_consumption_no_battery_pct": 33.3,
+  "solar_self_consumption_with_battery_pct": 33.4,
+  "capex": {
+    "bom_base_cad": 330900.0,
+    "bom_scenario": "current_total",
+    "battery_capex_cad": 0.0,
+    "adders_cad": 0.0,
+    "contingency_cad": 33090.0,
+    "total_capex_cad": 363990.0
+  },
+  "annual_maintenance_cad": 2000,
+  "metrics": {
+    "total_capex_cad": 363990.0,
+    "year1_savings_cad": 13786.81,
+    "npv_cad": -228637.11,
+    "irr_pct": -1.94,
+    "simple_payback_years": null,
+    "discount_rate_pct": 8.0,
+    "project_life_years": 20
+  },
+  "sizing_recommendation": {
+    "recommended_kwh": 1300.0,
+    "recommended_kw": 150.0,
+    "npv_at_recommended_cad": -227867.0,
+    "note": "Existing pack is ~650 kWh; recommendation is the NPV-maximising size across the swept range under current assumptions."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "active_bom_total_cad": 330900.0,
+  "optimized_target_cad": 273300.0,
+  "scope_breakdown": {
+    "BATTERY": 101700.0,
+    "PV": 41500.0,
+    "SHARED": 145000.0
+  },
+  "line_items_included_total_cad": 288200.0
+}

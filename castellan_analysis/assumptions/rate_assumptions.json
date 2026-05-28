@@ -1,0 +1,33 @@
+{
+  "_comment": "Human-editable utility rate knobs. prepare_inputs.py expands these into the QuESt-format input_data/rate_structure.json (12x24 weekday/weekend schedules). Rates are Ontario RPP Time-of-Use (CAD/kWh) as provided for this project. Set plan to 'ulo' to use the Ultra-Low Overnight plan, or 'flat' for a single energy rate.",
+  "name": "Ontario RPP Time-of-Use",
+  "utility": "Ontario (assumed)",
+  "currency": "CAD",
+  "plan": "tou",
+  "_plan_options": ["tou", "ulo", "flat"],
+  "energy_rates_cad_per_kwh": {
+    "off_peak": 0.098,
+    "mid_peak": 0.157,
+    "on_peak": 0.203,
+    "ulo_overnight": 0.039,
+    "flat": 0.122
+  },
+  "tou_periods": {
+    "summer_months": [5, 6, 7, 8, 9, 10],
+    "on_peak_hours_summer": [11, 12, 13, 14, 15, 16],
+    "mid_peak_hours_summer": [7, 8, 9, 10, 17, 18],
+    "on_peak_hours_winter": [7, 8, 9, 10, 17, 18],
+    "mid_peak_hours_winter": [11, 12, 13, 14, 15, 16]
+  },
+  "ulo_overnight_hours": [23, 0, 1, 2, 3, 4, 5, 6],
+  "ulo_on_peak_hours_weekday": [16, 17, 18, 19, 20],
+  "demand_charge_cad_per_kw": 0.0,
+  "_demand_charge_note": "Ontario RPP TOU has no demand charge; set a $/kW value here if the site is on a General Service / demand-billed tariff to value peak-demand reduction.",
+  "net_metering": {
+    "enabled": true,
+    "credit_mode": "flat",
+    "_credit_mode_options": ["flat", "retail"],
+    "_credit_mode_note": "'flat' = NEM 1.0: exports credited at a single sell price (realistic for Ontario; no grid-charge-to-export arbitrage). 'retail' = NEM 2.0: exports credited at the full retail TOU rate (can overstate value by enabling price arbitrage).",
+    "sell_price_cad_per_kwh": 0.098
+  }
+}
