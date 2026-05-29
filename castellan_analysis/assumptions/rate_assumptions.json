@@ -1,10 +1,17 @@
 {
-  "_comment": "Human-editable utility rate knobs. prepare_inputs.py expands these into the QuESt-format input_data/rate_structure.json (12x24 weekday/weekend schedules). Rates are Ontario RPP Time-of-Use (CAD/kWh) as provided for this project. Set plan to 'ulo' to use the Ultra-Low Overnight plan, or 'flat' for a single energy rate.",
-  "name": "Ontario RPP Time-of-Use",
-  "utility": "Ontario (assumed)",
+  "_comment": "Castellan Farm ACTUAL tariff. plan='custom_tou' uses the explicit peak/mid/off hours and rates below (no seasonal variation). Switch plan to 'tou'/'ulo'/'flat' to use the Ontario RPP fields instead. After editing, re-run prepare_inputs.py.",
+  "name": "Castellan actual TOU",
+  "utility": "Castellan Farm (actual)",
   "currency": "CAD",
-  "plan": "tou",
-  "_plan_options": ["tou", "ulo", "flat"],
+  "plan": "custom_tou",
+  "_plan_options": ["custom_tou", "tou", "ulo", "flat"],
+  "custom_tou": {
+    "rates_cad_per_kwh": { "off": 0.02, "mid": 0.09, "peak": 0.27 },
+    "peak_hours": [11, 12, 13, 14, 15, 16],
+    "mid_hours": [7, 8, 9, 10],
+    "_hours_note": "Normal on-peak window 11:00-17:00 (6 h), mid 07:00-11:00 (4 h), off-peak the remaining 14 h. Weekends all off-peak.",
+    "weekend_all_off": true
+  },
   "energy_rates_cad_per_kwh": {
     "off_peak": 0.098,
     "mid_peak": 0.157,
@@ -22,12 +29,11 @@
   "ulo_overnight_hours": [23, 0, 1, 2, 3, 4, 5, 6],
   "ulo_on_peak_hours_weekday": [16, 17, 18, 19, 20],
   "demand_charge_cad_per_kw": 0.0,
-  "_demand_charge_note": "Ontario RPP TOU has no demand charge; set a $/kW value here if the site is on a General Service / demand-billed tariff to value peak-demand reduction.",
+  "_demand_charge_note": "Set a $/kW value if the site is on a demand-billed (General Service) tariff to value peak-demand reduction.",
   "net_metering": {
     "enabled": true,
     "credit_mode": "flat",
     "_credit_mode_options": ["flat", "retail"],
-    "_credit_mode_note": "'flat' = NEM 1.0: exports credited at a single sell price (realistic for Ontario; no grid-charge-to-export arbitrage). 'retail' = NEM 2.0: exports credited at the full retail TOU rate (can overstate value by enabling price arbitrage).",
-    "sell_price_cad_per_kwh": 0.098
+    "sell_price_cad_per_kwh": 0.02
   }
 }

@@ -96,12 +96,13 @@ def write_report(path: Path, summary: dict, battery: dict, financial: dict,
     a(f"- **Annual energy-charge savings (battery):** {_money(summary['annual_energy_savings_cad'])}/yr")
     a(f"- **Annual demand-charge savings (battery):** {_money(summary['annual_demand_savings_cad'])}/yr")
     a("")
-    a("> **Peak-demand note:** under an Ontario RPP Time-of-Use tariff there is "
-      "no demand ($/kW) charge, so peak-demand reduction carries **$0** value and "
-      "the optimizer may even raise peak load while charging off-peak. Set "
-      "`demand_charge_cad_per_kw` in `assumptions/rate_assumptions.json` (and "
-      "re-run `prepare_inputs.py`) to value peak shaving on a demand-billed tariff.")
-    a("")
+    if abs(summary.get("annual_demand_savings_cad", 0)) < 1:
+        a("> **Peak-demand note:** this tariff has no demand ($/kW) charge, so "
+          "peak-demand reduction carries **$0** value and the optimizer may even "
+          "raise peak load while charging off-peak. Set `demand_charge_cad_per_kw` "
+          "in `assumptions/rate_assumptions.json` (and re-run `prepare_inputs.py`) "
+          "to value peak shaving on a demand-billed tariff.")
+        a("")
 
     # ---- CAPEX ------------------------------------------------------------
     a("## 4. CAPEX (from BOM)")
@@ -112,7 +113,10 @@ def write_report(path: Path, summary: dict, battery: dict, financial: dict,
     a(f"| Battery (new) | {_money(capex['battery_capex_cad'])} |")
     a(f"| Adders (EPC / interconnection / engineering / other) | {_money(capex['adders_cad'])} |")
     a(f"| Contingency | {_money(capex['contingency_cad'])} |")
-    a(f"| **Total CAPEX** | **{_money(capex['total_capex_cad'])}** |")
+    if capex.get("itc_rate"):
+        a(f"| Subtotal (pre-incentive) | {_money(capex.get('pre_itc_capex_cad'))} |")
+        a(f"| Clean-Tech ITC ({capex['itc_rate']:.0%}) | −{_money(capex.get('itc_credit_cad'))} |")
+    a(f"| **Total CAPEX (net)** | **{_money(capex['total_capex_cad'])}** |")
     a("")
     a("Top included BOM line items:")
     a("")
@@ -166,13 +170,14 @@ def write_report(path: Path, summary: dict, battery: dict, financial: dict,
       f"contingency: {financial['contingency_pct']:.0%}; "
       f"PV degradation: {financial['pv_degradation_rate']:.1%}")
     a("")
-    a("**Utility rate** (Ontario RPP Time-of-Use, CAD/kWh)")
-    a(f"- Off-peak {energy_rates.get('0')}, mid-peak {energy_rates.get('1')}, "
-      f"on-peak {energy_rates.get('2')}")
+    a(f"**Utility rate** — {rate.get('name', 'custom')} (CAD/kWh)")
+    rate_vals = ", ".join(f"period {k}: {v}" for k, v in energy_rates.items())
+    a(f"- Energy rates by TOU period: {rate_vals}")
     a(f"- Net metering: {'retail (NEM 2.0)' if rate['net metering']['type'] else 'flat credit (NEM 1.0)'} "
       f"@ {rate['net metering']['energy sell price']} $/kWh")
     a("")
-    a("**Solar:** modelled 75 kW Ontario array (clear-sky + monthly scaling), "
+    pv_kw = operating.get("solar", {}).get("pv_system_kw", "?")
+    a(f"**Solar:** existing {pv_kw} kW array, modelled (clear-sky + monthly scaling), "
       f"~{summary['annual_pv_kwh']:,.0f} kWh/yr. Replace `input_data/solar_production.csv` "
       "with measured / PVWatts data when available.")
     a("")
@@ -188,10 +193,10 @@ def write_report(path: Path, summary: dict, battery: dict, financial: dict,
     a("2. **Solar is modelled, not measured.** PV output is a clear-sky estimate "
       "scaled to a typical Ontario capacity factor; actual generation will vary with "
       "weather, soiling, shading and array orientation.")
-    a("3. **Rate is an assumption.** Ontario RPP TOU energy rates were used with no "
-      "demand charge; net metering is modelled as a flat export credit. Confirm the "
-      "site's actual tariff, including any global adjustment, delivery and regulatory "
-      "charges, which are not modelled here.")
+    a("3. **Rate covers energy commodity only.** The configured TOU energy rates "
+      "are modelled with a flat net-metering export credit. Delivery, regulatory, "
+      "fixed and global-adjustment charges are **not** included; actual bill savings "
+      "may differ, especially where those charges scale with peak kW/kWh.")
     a("4. **Monthly independent optimization.** QuESt BTM optimizes each month "
       "separately with a fixed initial state of charge; it does not co-optimize "
       "across month boundaries or model ageing within the dispatch.")

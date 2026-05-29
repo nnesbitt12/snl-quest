@@ -11,7 +11,7 @@
   "load_source_column": "metered",
   "_load_source_column_options": ["metered", "adjusted"],
   "solar": {
-    "pv_system_kw": 75,
+    "pv_system_kw": 50,
     "latitude_deg": 44.0,
     "target_capacity_factor": 0.145,
     "monthly_irradiance_factors": [0.45, 0.62, 0.88, 1.05, 1.22, 1.28, 1.30, 1.18, 0.95, 0.68, 0.42, 0.35]

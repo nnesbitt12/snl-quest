@@ -7,8 +7,11 @@
   "opex_escalation_rate": 0.02,
   "annual_maintenance_cad": 2000,
   "pv_degradation_rate": 0.005,
-  "bom_scenario": "current_total",
-  "_bom_scenario_options": ["current_total", "optimized_target", "line_items_included"],
+  "bom_scenario": "battery_scope_only",
+  "_bom_scenario_options": ["current_total", "optimized_target", "line_items_included", "battery_scope_only", "bess_less_solar"],
+  "_bom_scenario_note": "battery_scope_only = BESS battery-scope items only (existing battery pack is $0). bess_less_solar = everything except the PV/solar-upgrade items.",
+  "itc_rate": 0.30,
+  "_itc_note": "Canada Clean Technology Investment Tax Credit (30% refundable for eligible business/farm solar + storage). Set to 0 to show pre-incentive economics.",
   "contingency_pct": 0.10,
   "capex_overrides": {
     "installed_cost_cad": null,

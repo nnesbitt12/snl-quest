@@ -162,6 +162,16 @@ def build_rate_structure(rate: dict) -> dict:
         energy_rates = {"0": er["flat"]}
         weekday = [[0] * 24 for _ in months]
         weekend = [[0] * 24 for _ in months]
+    elif plan == "custom_tou":
+        # Explicit peak/mid/off hours and rates, no seasonal variation.
+        ct = rate["custom_tou"]
+        r = ct["rates_cad_per_kwh"]
+        energy_rates = {"0": r["off"], "1": r["mid"], "2": r["peak"]}
+        peak_h, mid_h = set(ct["peak_hours"]), set(ct["mid_hours"])
+        weekday = [[2 if h in peak_h else (1 if h in mid_h else 0) for h in hours]
+                   for _ in months]
+        weekend = ([[0] * 24 for _ in months] if ct.get("weekend_all_off", True)
+                   else [row[:] for row in weekday])
     elif plan == "ulo":
         # 0=ULO overnight, 1=weekend off-peak, 2=mid-peak, 3=on-peak (approximate).
         energy_rates = {"0": er["ulo_overnight"], "1": er["off_peak"],
@@ -294,7 +304,7 @@ def main() -> None:
           f"annual {load.sum():,.0f} kWh, peak {load.max():,.1f} kW, "
           f"intraday_shape={operating.get('apply_intraday_load_shape', False)}")
 
-    print("Modelling solar profile (Ontario 75 kW estimate) ...")
+    print(f"Modelling solar profile ({operating['solar']['pv_system_kw']} kW estimate) ...")
     solar = build_solar_profile(load.index, operating)
     solar.to_frame().to_csv(SOLAR_CSV, index_label="datetime")
     cf = solar.sum() / (operating['solar']['pv_system_kw'] * len(solar))

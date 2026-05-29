@@ -33,6 +33,7 @@ def compute_capex(bom_df: pd.DataFrame, bom_summary: dict,
     overrides = financial.get("capex_overrides", {})
     installed_override = overrides.get("installed_cost_cad")
 
+    inc = bom_df[bom_df["included"]]
     if installed_override is not None:
         base = float(installed_override)
         source = "installed_cost_override"
@@ -42,8 +43,12 @@ def compute_capex(bom_df: pd.DataFrame, bom_summary: dict,
             base = float(bom_summary.get("active_bom_total_cad") or 0.0)
         elif scenario == "optimized_target":
             base = float(bom_summary.get("optimized_target_cad") or 0.0)
+        elif scenario == "battery_scope_only":
+            base = float(inc.loc[inc["scope"] == "BATTERY", "total_cost"].sum())
+        elif scenario == "bess_less_solar":
+            base = float(inc.loc[inc["scope"] != "PV", "total_cost"].sum())
         else:  # line_items_included
-            base = float(bom_df.loc[bom_df["included"], "total_cost"].sum())
+            base = float(inc["total_cost"].sum())
         source = scenario
 
     battery_capex = (
@@ -58,13 +63,19 @@ def compute_capex(bom_df: pd.DataFrame, bom_summary: dict,
     )
     subtotal = base + battery_capex + adders
     contingency = subtotal * float(financial.get("contingency_pct", 0.0))
-    total = subtotal + contingency
+    pre_itc = subtotal + contingency
+    itc_rate = float(financial.get("itc_rate", 0.0))
+    itc = pre_itc * itc_rate
+    total = pre_itc - itc
     return {
         "bom_base_cad": round(base, 2),
         "bom_scenario": source,
         "battery_capex_cad": round(battery_capex, 2),
         "adders_cad": round(adders, 2),
         "contingency_cad": round(contingency, 2),
+        "pre_itc_capex_cad": round(pre_itc, 2),
+        "itc_rate": itc_rate,
+        "itc_credit_cad": round(itc, 2),
         "total_capex_cad": round(total, 2),
     }
 
