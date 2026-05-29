@@ -9,6 +9,11 @@
   "load_value_interpretation": "hourly_kw",
   "representative_window": "most_recent_12_months",
   "load_source_column": "metered",
+  "monthly_kwh_calibration": {
+    "_note": "Actual billed kWh per calendar month from the Centre Wellington Hydro Customer Activity Statement (avg of available years). Each month of the hourly profile is scaled to match. Set to null to use the raw metered profile.",
+    "1": 27056.97, "2": 33936.9, "3": 36942.06, "4": 19722.85, "5": 5528.34, "6": 4883.76,
+    "7": 3568.15, "8": 3056.53, "9": 2321.43, "10": 16515.6, "11": 33467.55, "12": 34888.47
+  },
   "_load_source_column_options": ["metered", "adjusted"],
   "solar": {
     "pv_system_kw": 50,

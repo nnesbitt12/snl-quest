@@ -108,6 +108,18 @@ def build_load_profile(operating: dict) -> pd.Series:
             values.append(overall_mean)
     profile = pd.Series(np.array(values, dtype=float), index=target_index, name="load_kW")
 
+    # Calibrate each calendar month to actual billed kWh, if provided.
+    cal = operating.get("monthly_kwh_calibration")
+    if cal:
+        for key, target in cal.items():
+            if str(key).startswith("_"):
+                continue
+            m = int(key)
+            mask = profile.index.month == m
+            current = profile[mask].sum()
+            if current > 0:
+                profile.loc[mask] = profile.loc[mask] * (float(target) / current)
+
     if operating.get("apply_intraday_load_shape", False):
         # Preserve each day's mean energy while applying a generic intraday shape.
         daily_mean = profile.groupby(profile.index.normalize()).transform("mean")

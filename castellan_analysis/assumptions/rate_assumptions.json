@@ -6,10 +6,10 @@
   "plan": "custom_tou",
   "_plan_options": ["custom_tou", "tou", "ulo", "flat"],
   "custom_tou": {
-    "rates_cad_per_kwh": { "off": 0.02, "mid": 0.09, "peak": 0.27 },
+    "rates_cad_per_kwh": { "off": 0.045, "mid": 0.115, "peak": 0.295 },
     "peak_hours": [15, 16, 17, 18, 19, 20],
     "mid_hours": [7, 8, 9, 10],
-    "_hours_note": "ULO-style evening on-peak 15:00-21:00 (6 h), mid 07:00-11:00 (4 h), off/overnight the remaining 14 h. Weekends off-peak. Global Adjustment is baked into these RPP/ULO commodity prices.",
+    "_hours_note": "ULO-style evening on-peak 15:00-21:00 (6 h), mid 07:00-11:00 (4 h), off/overnight the remaining 14 h. Weekends off-peak. Rates = ULO commodity (2/9/27c, GA baked in) + ~2.5c/kWh delivery so the blended volumetric matches the 9.81c/kWh derived by regression from the actual Customer Activity Statement.",
     "weekend_all_off": true
   },
   "energy_rates_cad_per_kwh": {
@@ -28,8 +28,8 @@
   },
   "ulo_overnight_hours": [23, 0, 1, 2, 3, 4, 5, 6],
   "ulo_on_peak_hours_weekday": [16, 17, 18, 19, 20],
-  "demand_charge_cad_per_kw": 12.0,
-  "_demand_charge_note": "Combined transmission (network+connection) + distribution demand charge for an Ontario General Service >50 kW customer, $/kW of monthly peak. PLACEHOLDER ~$12/kW from standard Ontario GS>50 values — confirm Centre Wellington Hydro's exact $/kW from one actual bill and update.",
+  "demand_charge_cad_per_kw": 22.87,
+  "_demand_charge_note": "Combined transmission + distribution demand charge, $/kW of monthly peak, DERIVED by regression (R^2=0.9994) from the actual Centre Wellington Hydro Customer Activity Statement (22 months). Demand charges are ~43% of the bill (~$17,800/yr).",
   "net_metering": {
     "enabled": true,
     "credit_mode": "flat",
