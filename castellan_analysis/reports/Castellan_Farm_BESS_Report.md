@@ -9,40 +9,38 @@ _Generated 2026-05-29 using QuESt BTM (engine: **quest**) + project financial mo
 | Metric | Value |
 |---|---|
 | Total project CAPEX | $78,309 (battery_scope_only) |
-| Year-1 total savings | $10,586/yr |
-| — PV self-consumption savings | $4,102/yr |
-| — Battery dispatch savings | $6,484/yr |
+| Year-1 total savings | $14,188/yr |
+| — PV self-consumption savings | $3,004/yr |
+| — Battery dispatch savings | $11,184/yr |
 | Annual O&M | $2,000/yr |
-| Simple payback | 8.65 years |
-| NPV @ 8.0% over 20 yr | $14,040 |
-| IRR | 10.2% |
-| Avg. monthly peak-demand reduction | -26.4 kW |
-| Solar self-consumption (no batt → batt) | 40.0% → 40.1% |
+| Simple payback | 6.24 years |
+| NPV @ 8.0% over 20 yr | $49,555 |
+| IRR | 15.5% |
+| Avg. monthly peak-demand reduction | 22.4 kW |
+| Solar self-consumption (no batt → batt) | 40.0% → 57.7% |
 
 ## 2. Battery sizing recommendation
 
-Across the swept range, NPV is maximised at **975 kWh / 112 kW** (NPV $14,644). Existing pack is ~650 kWh; recommendation is the NPV-maximising size across the swept range under current assumptions.
+Across the swept range, NPV is maximised at **1300 kWh / 150 kW** (NPV $55,429). Existing pack is ~650 kWh; recommendation is the NPV-maximising size across the swept range under current assumptions.
 
 |   battery_kwh |   battery_kw |   battery_savings_cad |   year1_savings_cad |   npv_cad |   irr_pct |   simple_payback_years |
 |--------------:|-------------:|----------------------:|--------------------:|----------:|----------:|-----------------------:|
-|           325 |        37.5  |                  5413 |                9515 |      3010 |      8.49 |                   9.78 |
-|           488 |        56.31 |                  6297 |               10399 |     12114 |      9.93 |                   8.83 |
-|           650 |        75    |                  6484 |               10586 |     14040 |     10.23 |                   8.65 |
-|           812 |        93.69 |                  6537 |               10640 |     14594 |     10.31 |                   8.6  |
-|           975 |       112.5  |                  6542 |               10644 |     14644 |     10.32 |                   8.6  |
-|          1300 |       150    |                  6542 |               10644 |     14644 |     10.32 |                   8.6  |
+|           325 |        37.5  |                  9670 |               12674 |     33956 |     13.24 |                   7.09 |
+|           488 |        56.31 |                 10870 |               13874 |     46319 |     15.01 |                   6.4  |
+|           650 |        75    |                 11184 |               14188 |     49555 |     15.47 |                   6.24 |
+|           812 |        93.69 |                 11393 |               14397 |     51703 |     15.77 |                   6.14 |
+|           975 |       112.5  |                 11541 |               14545 |     53230 |     15.98 |                   6.07 |
+|          1300 |       150    |                 11754 |               14759 |     55429 |     16.29 |                   5.97 |
 
 ## 3. Energy, savings and demand
 
 - **Annual farm load:** 175,530 kWh (peak 115 kW)
 - **Annual PV generation (modelled):** 63,510 kWh
-- **Status-quo utility bill (grid only):** $12,982/yr
-- **PV-only bill (baseline case):** $8,879/yr
-- **PV + battery bill (battery case):** $2,396/yr
-- **Annual energy-charge savings (battery):** $6,484/yr
-- **Annual demand-charge savings (battery):** $0/yr
-
-> **Peak-demand note:** this tariff has no demand ($/kW) charge, so peak-demand reduction carries **$0** value and the optimizer may even raise peak load while charging off-peak. Set `demand_charge_cad_per_kw` in `assumptions/rate_assumptions.json` (and re-run `prepare_inputs.py`) to value peak shaving on a demand-billed tariff.
+- **Status-quo utility bill (grid only):** $21,534/yr
+- **PV-only bill (baseline case):** $18,530/yr
+- **PV + battery bill (battery case):** $7,346/yr
+- **Annual energy-charge savings (battery):** $8,178/yr
+- **Annual demand-charge savings (battery):** $3,231/yr
 
 ## 4. CAPEX (from BOM)
 
@@ -75,68 +73,68 @@ Top included BOM line items:
 
 |   year |   gross_savings_cad |   opex_cad |   net_cash_flow_cad |   cumulative_net_cad |   cumulative_discounted_cad |
 |-------:|--------------------:|-----------:|--------------------:|---------------------:|----------------------------:|
-|      1 |             10585.8 |    2000    |             8585.78 |            -69723.2  |                   -70359.2  |
-|      2 |             10748.7 |    2040    |             8708.67 |            -61014.6  |                   -62892.9  |
-|      3 |             10911.8 |    2080.8  |             8831    |            -52183.6  |                   -55882.6  |
-|      4 |             11075   |    2122.42 |             8952.63 |            -43230.9  |                   -49302.1  |
-|      5 |             11238.3 |    2164.86 |             9073.4  |            -34157.5  |                   -43126.9  |
-|      6 |             11401.3 |    2208.16 |             9193.15 |            -24964.4  |                   -37333.7  |
-|      7 |             11564   |    2252.32 |             9311.7  |            -15652.7  |                   -31900.4  |
-|      8 |             11726.2 |    2297.37 |             9428.87 |             -6223.8  |                   -26806.3  |
-|      9 |             11887.8 |    2343.32 |             9544.46 |              3320.66 |                   -22031.7  |
-|     10 |             12048.5 |    2390.19 |             9658.28 |             12978.9  |                   -17558    |
-|     11 |             12208.1 |    2437.99 |             9770.1  |             22749    |                   -13367.8  |
-|     12 |             12366.4 |    2486.75 |             9879.69 |             32628.7  |                    -9444.44 |
-|     13 |             12523.3 |    2536.48 |             9986.83 |             42615.6  |                    -5772.31 |
-|     14 |             12678.5 |    2587.21 |            10091.2  |             52706.8  |                    -2336.63 |
-|     15 |             12831.6 |    2638.96 |            10192.7  |             62899.5  |                      876.53 |
-|     16 |             12982.6 |    2691.74 |            10290.9  |             73190.4  |                     3880.34 |
-|     17 |             13131.1 |    2745.57 |            10385.5  |             83575.9  |                     6687.23 |
-|     18 |             13276.8 |    2800.48 |            10476.3  |             94052.2  |                     9308.92 |
-|     19 |             13419.4 |    2856.49 |            10562.9  |            104615    |                    11756.5  |
-|     20 |             13558.7 |    2913.62 |            10645    |            115260    |                    14040.4  |
+|      1 |             14188.5 |    2000    |             12188.5 |            -66120.5  |                   -67023.4  |
+|      2 |             14368.2 |    2040    |             12328.2 |            -53792.3  |                   -56453.9  |
+|      3 |             14546   |    2080.8  |             12465.2 |            -41327.1  |                   -46558.6  |
+|      4 |             14721.6 |    2122.42 |             12599.2 |            -28727.9  |                   -37297.8  |
+|      5 |             14894.6 |    2164.86 |             12729.7 |            -15998.2  |                   -28634.2  |
+|      6 |             15064.7 |    2208.16 |             12856.5 |             -3141.65 |                   -20532.4  |
+|      7 |             15231.6 |    2252.32 |             12979.3 |              9837.62 |                   -12959.1  |
+|      8 |             15395   |    2297.37 |             13097.6 |             22935.2  |                    -5882.91 |
+|      9 |             15554.4 |    2343.32 |             13211.1 |             36146.3  |                      725.93 |
+|     10 |             15709.6 |    2390.19 |             13319.4 |             49465.7  |                     6895.4  |
+|     11 |             15860.1 |    2437.99 |             13422.1 |             62887.8  |                    12651.9  |
+|     12 |             16005.5 |    2486.75 |             13518.7 |             76406.5  |                    18020.4  |
+|     13 |             16145.3 |    2536.48 |             13608.8 |             90015.3  |                    23024.3  |
+|     14 |             16279.1 |    2587.21 |             13691.9 |            103707    |                    27685.9  |
+|     15 |             16406.4 |    2638.96 |             13767.5 |            117475    |                    32025.9  |
+|     16 |             16526.7 |    2691.74 |             13835   |            131310    |                    36064.2  |
+|     17 |             16639.5 |    2745.57 |             13893.9 |            145204    |                    39819.3  |
+|     18 |             16744.1 |    2800.48 |             13943.6 |            159147    |                    43308.7  |
+|     19 |             16840   |    2856.49 |             13983.5 |            173131    |                    46548.8  |
+|     20 |             16926.7 |    2913.62 |             14013   |            187144    |                    49555.3  |
 
 ## 6. Sensitivity analysis
 ### 6.1 CAPEX (multiplier on total CAPEX)
 
 |   capex_multiplier |   total_capex_cad |   npv_cad |   irr_pct |   simple_payback_years |
 |-------------------:|------------------:|----------:|----------:|-----------------------:|
-|                0.8 |           62647.2 |     29702 |     13.62 |                   7    |
-|                0.9 |           70478.1 |     21871 |     11.77 |                   7.83 |
-|                1   |           78309   |     14040 |     10.23 |                   8.65 |
-|                1.1 |           86139.9 |      6209 |      8.91 |                   9.47 |
-|                1.2 |           93970.8 |     -1621 |      7.78 |                  10.27 |
+|                0.8 |           62647.2 |     65217 |     19.8  |                   5.03 |
+|                0.9 |           70478.1 |     57386 |     17.42 |                   5.64 |
+|                1   |           78309   |     49555 |     15.47 |                   6.24 |
+|                1.1 |           86139.9 |     41724 |     13.82 |                   6.85 |
+|                1.2 |           93970.8 |     33894 |     12.41 |                   7.44 |
 
 ### 6.2 Electricity rate (multiplier on savings)
 
 |   rate_multiplier |   year1_savings_cad |   npv_cad |   irr_pct |   simple_payback_years |
 |------------------:|--------------------:|----------:|----------:|-----------------------:|
-|               0.8 |                8469 |     -8971 |      6.48 |                  11.31 |
-|               0.9 |                9527 |      2535 |      8.41 |                   9.8  |
-|               1   |               10586 |     14040 |     10.23 |                   8.65 |
-|               1.1 |               11644 |     25546 |     11.95 |                   7.75 |
-|               1.2 |               12703 |     37052 |     13.6  |                   7.01 |
-|               1.5 |               15879 |     71568 |     18.27 |                   5.46 |
+|               0.8 |               11351 |     19441 |     11.1  |                   8.07 |
+|               0.9 |               12770 |     34498 |     13.33 |                   7.04 |
+|               1   |               14188 |     49555 |     15.47 |                   6.24 |
+|               1.1 |               15607 |     64612 |     17.53 |                   5.61 |
+|               1.2 |               17026 |     79669 |     19.54 |                   5.09 |
+|               1.5 |               21283 |    124841 |     25.35 |                   3.99 |
 
 ### 6.3 Battery degradation rate
 
 |   battery_degradation_rate |   npv_cad |   irr_pct |   simple_payback_years |
 |---------------------------:|----------:|----------:|-----------------------:|
-|                       0    |     26664 |     11.84 |                   8.19 |
-|                       0.01 |     20352 |     11.07 |                   8.4  |
-|                       0.02 |     14040 |     10.23 |                   8.65 |
-|                       0.03 |      7729 |      9.3  |                   8.94 |
-|                       0.05 |     -4895 |      7.05 |                   9.67 |
+|                       0    |     71331 |     17.46 |                   5.96 |
+|                       0.01 |     60443 |     16.51 |                   6.09 |
+|                       0.02 |     49555 |     15.47 |                   6.24 |
+|                       0.03 |     38667 |     14.3  |                   6.41 |
+|                       0.05 |     16891 |     11.38 |                   6.83 |
 
 ### 6.4 Discount rate
 
 |   discount_rate |   npv_cad |   irr_pct |   simple_payback_years |
 |----------------:|----------:|----------:|-----------------------:|
-|            0.04 |     51293 |     10.23 |                   8.65 |
-|            0.06 |     30303 |     10.23 |                   8.65 |
-|            0.08 |     14040 |     10.23 |                   8.65 |
-|            0.1  |      1265 |     10.23 |                   8.65 |
-|            0.12 |     -8904 |     10.23 |                   8.65 |
+|            0.04 |    100319 |     15.47 |                   6.24 |
+|            0.06 |     71742 |     15.47 |                   6.24 |
+|            0.08 |     49555 |     15.47 |                   6.24 |
+|            0.1  |     32093 |     15.47 |                   6.24 |
+|            0.12 |     18165 |     15.47 |                   6.24 |
 
 ## 7. Assumptions used
 
@@ -150,7 +148,7 @@ Top included BOM line items:
 - Electricity escalation: 3.0%; O&M escalation: 2.0%
 - Annual O&M: $2,000; contingency: 10%; PV degradation: 0.5%
 
-**Utility rate** — Castellan actual TOU (CAD/kWh)
+**Utility rate** — Centre Wellington Hydro ULO + GS>50kW demand (CAD/kWh)
 - Energy rates by TOU period: period 0: 0.02, period 1: 0.09, period 2: 0.27
 - Net metering: flat credit (NEM 1.0) @ 0.02 $/kWh
 
