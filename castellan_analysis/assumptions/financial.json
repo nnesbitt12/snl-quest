@@ -7,7 +7,7 @@
   "opex_escalation_rate": 0.02,
   "annual_maintenance_cad": 2000,
   "pv_degradation_rate": 0.005,
-  "bom_scenario": "battery_scope_only",
+  "bom_scenario": "bess_less_solar",
   "_bom_scenario_options": ["current_total", "optimized_target", "line_items_included", "battery_scope_only", "bess_less_solar"],
   "_bom_scenario_note": "battery_scope_only = BESS battery-scope items only (existing battery pack is $0). bess_less_solar = everything except the PV/solar-upgrade items.",
   "itc_rate": 0.30,
